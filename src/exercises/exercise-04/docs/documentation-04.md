@@ -9,6 +9,8 @@ On most modern Linux distributions the ssh-agent is installed as a part of the O
 
 ## Related Links
 
+[SSH](https://en.wikipedia.org/wiki/Secure_Shell)
+
 [ssh-keygen](https://linux.die.net/man/1/ssh-keygen)
 
 [ssh-passphrase](https://www.ssh.com/academy/ssh/passphrase)
