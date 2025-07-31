@@ -19,7 +19,7 @@ docs_dir: src
 nav:
   - Home: index.md
   - Hetzner Cloud Setup: cloud-setup/docs/setup.md
-  - Exercise 01: exercises/exercise-01/docs/documentation-01.md
+  - 01 First Server: exercises/exercise-01/docs/documentation-01.md
   - Exercise 02: exercises/exercise-02/docs/documentation-02.md
   - Exercise 03: exercises/exercise-03/docs/documentation-03.md
   - Exercise 04: exercises/exercise-04/docs/documentation-04.md

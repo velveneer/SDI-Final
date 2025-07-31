@@ -1,5 +1,7 @@
 # Hetzner Cloud Setup
 
+## Technical Background
+
 Working with software defined infrastructur`requires a flexible and reproducible environment where infrastructure can be created, modified, and destroyed on demand.
 A cloud provider offers:
 
@@ -11,6 +13,14 @@ A cloud provider offers:
 In this course, a cloud platform is required to host virtual servers, configure networking, and deploy automation solutions.
 
 Hetzner provides an offer for educational institutions to learn how to use these systems.
+
+## Related Links
+
+[Hetzner Registration](https://accounts.hetzner.com/signUp)
+
+[Ubuntu OpenLDAP Installation](https://documentation.ubuntu.com/server/how-to/openldap/install-openldap/index.html)
+
+[Bind 9 Private DNS Server](https://www.digitalocean.com/community/tutorials/how-to-configure-bind-as-a-private-network-dns-server-on-ubuntu-20-04)
 
 ## Hetzner Account Registration
 
@@ -31,12 +41,5 @@ Hetzner provides an offer for educational institutions to learn how to use these
 !!!NOTE
     Hetzner may request identy verification, but no payment info is needed. If you get asked to put in payment options ignore and skip it.
 
-## Project Access
 
-1. Login in to your [Hetzner Account](https://accounts.hetzner.com/login)
-2. Open the `Hetzner Cloud Console` over the upper-right menu.
-3. Select your the project with your assigned group number (e.g. g11)
-4. Open the `Setting` page and go the `Members` Options
-5. Check if you have the `Admin` role assigned.
 
- 
