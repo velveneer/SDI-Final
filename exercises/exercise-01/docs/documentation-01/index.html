@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>01 First Server - SDI-Documentation-jr125</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "01 First Server";
+        var mkdocs_page_input_path = "exercises/exercise-01/docs/documentation-01.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/rust.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> SDI-Documentation-jr125
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../cloud-setup/docs/setup/">Hetzner Cloud Setup</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">01 First Server</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#technical-background">Technical Background</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-links">Related Links</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisits">Prerequisits</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#project-access">Project Access</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#setting-up-a-firewall">Setting up a Firewall</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#server-creation">Server Creation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#accessing-server-via-ssh">Accessing Server via SSH</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#accessing-server-via-hetzner-console">Accessing Server via Hetzner Console</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-02/docs/documentation-02/">02 Server Re-Creation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-03/docs/documentation-03/">03 Server Security Improvement</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-04/docs/documentation-04/">04 SSH-Agent</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-05/docs/documentation-05/">05 GitLab SSH Access</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-06/docs/documentation-06/">06 SSH Host Hopping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-07/docs/documentation-07/">07 SSH Port Forwarding</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-08/docs/documentation-08/">08 SSH X11 Forwarding</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-09/docs/documentation-09/">09 Enabling Index Based File Search</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-10/docs/documentation-10/">10 Using The tail -f Command</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-11/docs/documentation-11/">Exercise 11</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-12/docs/documentation-12/">Exercise 12</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-13/docs/documentation-13/">Exercise 13</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-14/docs/documentation-14/">Exercise 14</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-15/docs/documentation-15/">Exercise 15</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-16/docs/documentation-16/">Exercise 16</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-17/docs/documentation-17/">Exercise 17</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-18/docs/documentation-18/">Exercise 18</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-19/docs/documentation-19/">Exercise 19</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-20/docs/documentation-20/">Exercise 20</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-21/docs/documentation-21/">Exercise 21</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-22/docs/documentation-22/">Exercise 22</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-23/docs/documentation-23/">Exercise 23</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-24/docs/documentation-24/">Exercise 24</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-25/docs/documentation-25/">Exercise 25</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-26/docs/documentation-26/">Exercise 26</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">SDI-Documentation-jr125</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">01 First Server</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="first-server">First Server</h1>
+<h2 id="technical-background">Technical Background</h2>
+<p>In a software defined infrastructure environment, creating and managing virtual servers is a foundational skill.
+This exercise teaches how to:</p>
+<ul>
+<li>
+<p>Provision a cloud server</p>
+</li>
+<li>
+<p>Apply basic firewall rules</p>
+</li>
+<li>
+<p>Securely access the server using SSH</p>
+</li>
+<li>
+<p>Understand and verify SSH host keys to prevent security risks</p>
+</li>
+</ul>
+<h2 id="related-links">Related Links</h2>
+<p><a href="https://accounts.hetzner.com/login">Hetzner Login</a></p>
+<p><a href="https://console.hetzner.cloud/">Hetzner Console</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol">ICMP</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a></p>
+<p><a href="https://www.sectigo.com/resource-library/what-is-an-ssh-key#How%20do%20SSH%20keys%20work?">How SSH Works</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Graphical_user_interface">GUI</a></p>
+<p><a href="https://www.debian.org/releases/bookworm/">Debian 12</a></p>
+<p><a href="https://www.cisco.com/site/us/en/learn/topics/security/what-is-a-firewall.html#tabs-69d6a56dd3-item-fdd67b2fb8-tab">How Firewalls Work</a></p>
+<h2 id="prerequisits">Prerequisits</h2>
+<h3 id="project-access">Project Access</h3>
+<ol>
+<li>Login in to your <a href="https://accounts.hetzner.com/login">Hetzner Account</a></li>
+<li>Open the <code>Hetzner Cloud Console</code> over the upper-right menu.</li>
+<li>Select your the project with your assigned group number (e.g. g11)</li>
+<li>Open the <code>Setting</code> page and go the <code>Members</code> Options</li>
+<li>Check if you have the <code>Admin</code> role assigned.</li>
+</ol>
+<h3 id="setting-up-a-firewall">Setting up a Firewall</h3>
+<ol>
+<li>
+<p>In the <code>Cloud Console</code>, navigate to <code>Firewalls</code> → <code>Create Firewall</code></p>
+</li>
+<li>
+<p>Add inbound rules for:</p>
+</li>
+<li>
+<p><code>Port 22</code>: required for secure shell access</p>
+</li>
+<li>
+<p><code>ICMP</code>: allows ping for connectivity testing</p>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Leave the two inbound rules port 22 and ICMP untouched. Removing port 22 access will lock you out of your server.</p>
+</div>
+<ol>
+<li>
+<p>Name the firewall (e.g., basicFirewallG11)</p>
+</li>
+<li>
+<p>Click Create Firewall</p>
+</li>
+</ol>
+<h2 id="solution">Solution</h2>
+<h3 id="server-creation">Server Creation</h3>
+<ol>
+<li>
+<p>Go to Create Server in the console.</p>
+</li>
+<li>
+<p>Choose:</p>
+</li>
+<li><code>Image</code>: Debian 12 (default)</li>
+<li>
+<p><code>Type</code>: choose the cheapest available one</p>
+</li>
+<li>
+<p>Add the created firewall </p>
+</li>
+<li>
+<p>Give it a name (e.g. serverG11)</p>
+</li>
+<li>
+<p>Click <code>Create and Buy</code></p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You'll receive an E-Mail containing your server's IP and root password. You may reset root's password in the GUI's rescue tab.</p>
+</div>
+<h3 id="accessing-server-via-ssh">Accessing Server via SSH</h3>
+<ol>
+<li>Conntect to the server via a terminal with ssh:</li>
+</ol>
+<p><code>ssh root@&lt;your-server-ip</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can copy the ip address from the Hetzner Console</p>
+</div>
+<ol>
+<li>On the first connection you'll see a fingerprint prompt:</li>
+</ol>
+<pre><code>ssh root@95.216.187.60
+The authenticity of host '95.216.187.60 (95.216.187.60)' can't be established.
+ED25519 key fingerprint is SHA256:vpV7B+l9RLQ+SwTMqtkk7YbICBhyhi2OP780+WVEFMY.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+</code></pre>
+<ol>
+<li>Answer <code>yes</code> in the console to trust the server</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will save the fingerprint to <code>~/.ssh/known_hosts</code> for future connections. </p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This prevents man-in-the-middle attacks by ensuring you connect to the correct server.</p>
+</div>
+<ol>
+<li>After confirming the fingerprint, change the root password in the console:</li>
+</ol>
+<pre><code>Changing password for root:
+Current password:
+New password:
+Retype new password:
+</code></pre>
+<h3 id="accessing-server-via-hetzner-console">Accessing Server via Hetzner Console</h3>
+<p>Hetzner offers a way to access the server over a built-in console inside the webapplication.</p>
+<ol>
+<li>In the Hetzner GUI got to <code>server view</code></li>
+<li>Click the terminal icon <code>&gt;_</code></li>
+<li>Log in with the credentials you received in an email</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to keymapping issues you may need to change your keyboard layout to type the correct characters inside the built-in console.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../../../cloud-setup/docs/setup/" class="btn btn-neutral float-left" title="Hetzner Cloud Setup"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../exercise-02/docs/documentation-02/" class="btn btn-neutral float-right" title="02 Server Re-Creation">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../../../cloud-setup/docs/setup/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../../exercise-02/docs/documentation-02/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

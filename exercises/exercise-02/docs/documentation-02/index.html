@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>02 Server Re-Creation - SDI-Documentation-jr125</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "02 Server Re-Creation";
+        var mkdocs_page_input_path = "exercises/exercise-02/docs/documentation-02.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/rust.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> SDI-Documentation-jr125
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../cloud-setup/docs/setup/">Hetzner Cloud Setup</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-01/docs/documentation-01/">01 First Server</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">02 Server Re-Creation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#technical-background">Technical Background</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-links">Related Links</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#deletion-and-recreation-of-server">Deletion and recreation of server</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#connecting-via-ssh">Connecting via SSH</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#what-does-that-mean-and-why-does-it-happen">What does that mean and why does it happen?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-to-fix-the-host-key-conflict">How to fix the Host Key Conflict</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-03/docs/documentation-03/">03 Server Security Improvement</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-04/docs/documentation-04/">04 SSH-Agent</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-05/docs/documentation-05/">05 GitLab SSH Access</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-06/docs/documentation-06/">06 SSH Host Hopping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-07/docs/documentation-07/">07 SSH Port Forwarding</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-08/docs/documentation-08/">08 SSH X11 Forwarding</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-09/docs/documentation-09/">09 Enabling Index Based File Search</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-10/docs/documentation-10/">10 Using The tail -f Command</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-11/docs/documentation-11/">Exercise 11</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-12/docs/documentation-12/">Exercise 12</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-13/docs/documentation-13/">Exercise 13</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-14/docs/documentation-14/">Exercise 14</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-15/docs/documentation-15/">Exercise 15</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-16/docs/documentation-16/">Exercise 16</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-17/docs/documentation-17/">Exercise 17</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-18/docs/documentation-18/">Exercise 18</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-19/docs/documentation-19/">Exercise 19</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-20/docs/documentation-20/">Exercise 20</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-21/docs/documentation-21/">Exercise 21</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-22/docs/documentation-22/">Exercise 22</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-23/docs/documentation-23/">Exercise 23</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-24/docs/documentation-24/">Exercise 24</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-25/docs/documentation-25/">Exercise 25</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-26/docs/documentation-26/">Exercise 26</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">SDI-Documentation-jr125</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">02 Server Re-Creation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="server-recreation">Server Recreation</h1>
+<h2 id="technical-background">Technical Background</h2>
+<p>When a server is deleted and recreated while using the same IP address, its unique SSH host key changes. SSH clients detect this mismatch and block the connection to prevent potential man-in-the-middle attacks. Understanding why this warning occurs and how to resolve it safely is essential for managing dynamic cloud environments where servers are frequently replaced or re-provisioned.</p>
+<h2 id="related-links">Related Links</h2>
+<p><a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a></p>
+<p><a href="https://accounts.hetzner.com/login">Hetzner Login</a></p>
+<p><a href="https://console.hetzner.cloud/">Hetzner Console</a></p>
+<h2 id="solution">Solution</h2>
+<h3 id="deletion-and-recreation-of-server">Deletion and recreation of server</h3>
+<ol>
+<li>Delete the current running server with the Hetzner Cloud Console</li>
+<li>When prompted choose to keep the IPv4 and IPv6 address unassagnied to be reused</li>
+<li>Create a new server and use the unassigned IP addresses </li>
+</ol>
+<h3 id="connecting-via-ssh">Connecting via SSH</h3>
+<p>When you try to connect to the new server via SSH:</p>
+<p><code>ssh root@&lt;your-server-ip&gt;</code></p>
+<p>You will get an output in the console containing:</p>
+<pre><code>~$ ssh root@&lt;your-server-ip&gt;
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ED25519 key sent by the remote host is
+SHA256:Dg9+vHl/JYIEgYto5AjlwnttzI4yUcgre0c6hXXKkaQ.
+Please contact your system administrator.
+Add correct host key in /home/user/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in /home/user/.ssh/known_hosts:288
+Host key for &lt;your-server-ip&gt; has changed and you have requested strict checking.
+</code></pre>
+<h3 id="what-does-that-mean-and-why-does-it-happen">What does that mean and why does it happen?</h3>
+<p>SSH saves server host keys in ~/.ssh/known_hosts. When connecting again, it compares the saved fingerprint with the server’s current fingerprint. If the key differs (because the VM is new), SSH assumes a potential MITM attack and blocks the connection. This behavior is by design to protect against impersonation attacks.</p>
+<h3 id="how-to-fix-the-host-key-conflict">How to fix the Host Key Conflict</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Only do this if you are certain that the server was intentionally recreated and the IP address was reused for the same purpose.</p>
+</div>
+<p>You can either remove the old key with the command:</p>
+<p><code>ssh-keygen -R &lt;your-server-ip&gt;</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This deletes the old entry. When you reconnect, SSH will ask you to trust the new fingerprint.</p>
+</div>
+<p>Or manually edit your Known Host file:</p>
+<ol>
+<li>
+<p>Open <code>~/.ssh/known_hosts</code> in an editor.</p>
+</li>
+<li>
+<p>Remove the line referencing <code>&lt;your-server-ip&gt;</code></p>
+</li>
+<li>
+<p>Reconnect and accept the new fingerprint</p>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not copy keys between servers. Each server must have its own unique host key.
+Always confirm why the host key changed and verify the fingerprint after resolving the conflict.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../../exercise-01/docs/documentation-01/" class="btn btn-neutral float-left" title="01 First Server"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../exercise-03/docs/documentation-03/" class="btn btn-neutral float-right" title="03 Server Security Improvement">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../../exercise-01/docs/documentation-01/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../../exercise-03/docs/documentation-03/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>08 SSH X11 Forwarding - SDI-Documentation-jr125</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "08 SSH X11 Forwarding";
+        var mkdocs_page_input_path = "exercises/exercise-08/docs/documentation-08.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/rust.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> SDI-Documentation-jr125
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../cloud-setup/docs/setup/">Hetzner Cloud Setup</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-01/docs/documentation-01/">01 First Server</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-02/docs/documentation-02/">02 Server Re-Creation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-03/docs/documentation-03/">03 Server Security Improvement</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-04/docs/documentation-04/">04 SSH-Agent</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-05/docs/documentation-05/">05 GitLab SSH Access</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-06/docs/documentation-06/">06 SSH Host Hopping</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-07/docs/documentation-07/">07 SSH Port Forwarding</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">08 SSH X11 Forwarding</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#technical-background">Technical Background</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-links">Related Links</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#server-setup">Server Setup</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-x11-forwarding">Using X11 Forwarding</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-09/docs/documentation-09/">09 Enabling Index Based File Search</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-10/docs/documentation-10/">10 Using The tail -f Command</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-11/docs/documentation-11/">Exercise 11</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-12/docs/documentation-12/">Exercise 12</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-13/docs/documentation-13/">Exercise 13</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-14/docs/documentation-14/">Exercise 14</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-15/docs/documentation-15/">Exercise 15</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-16/docs/documentation-16/">Exercise 16</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-17/docs/documentation-17/">Exercise 17</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-18/docs/documentation-18/">Exercise 18</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-19/docs/documentation-19/">Exercise 19</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-20/docs/documentation-20/">Exercise 20</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-21/docs/documentation-21/">Exercise 21</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-22/docs/documentation-22/">Exercise 22</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-23/docs/documentation-23/">Exercise 23</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-24/docs/documentation-24/">Exercise 24</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-25/docs/documentation-25/">Exercise 25</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-26/docs/documentation-26/">Exercise 26</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">SDI-Documentation-jr125</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">08 SSH X11 Forwarding</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ssh-x11-forwarding">SSH X11 Forwarding</h1>
+<h2 id="technical-background">Technical Background</h2>
+<p>X11 forwarding allows you to run a graphical application on a remote host but display its window on your local desktop, all over a secure SSH connection. This is useful when the remote host is locked down (e.g., only SSH allowed, HTTP blocked) but you still need to use graphical tools, like a web browser, without exposing new network ports.</p>
+<h2 id="related-links">Related Links</h2>
+<p><a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a></p>
+<p><a href="https://wiki.gentoo.org/wiki/SSH_jump_host">SSH jump host</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Glossary/SSH_Agent_Forwarding">SSH Agent Forwarding Guide</a></p>
+<p><a href="https://man.openbsd.org/ssh_config#ForwardAgent">OpenSSH Manual: <code>ForwardAgent</code></a></p>
+<p><a href="https://docs.Nginx.com/Nginx/admin-guide/web-server">Nginx</a></p>
+<p><a href="https://www.w3.org/Protocols/">HTTP</a></p>
+<h2 id="solution">Solution</h2>
+<h3 id="server-setup">Server Setup</h3>
+<ol>
+<li>
+<p>Deploy a server with the same configuration as in <code>Exercise 3</code></p>
+</li>
+<li>
+<p>Install and start Nginx on the server:</p>
+</li>
+</ol>
+<pre><code>apt install nginx -y
+systemctl status nginx
+</code></pre>
+<ol>
+<li>Check that Nginx is reachable from the server itself:</li>
+</ol>
+<p><code>curl http://localhost</code></p>
+<ol>
+<li>
+<p>In the firewall, allow only SSH (TCP port 22) and remove HTTP (TCP port 80)</p>
+</li>
+<li>
+<p>Test that HTTP</p>
+</li>
+</ol>
+<p><code>curl http://&lt;server-ip&gt;</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Expected result: <code>connection refused or timeout</code></p>
+</div>
+<ol>
+<li>Install <code>xauth</code>, which is required for managing X11 authentication:</li>
+</ol>
+<p><code>apt install xauth</code></p>
+<h3 id="using-x11-forwarding">Using X11 Forwarding</h3>
+<p>If your local machine is a linux system X11 is included by default. On other system check how to install the appropiate tools.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure your local X11 Server is running.</p>
+</div>
+<ol>
+<li>Connect with X11 Forwarding using the <code>-Y</code> flag:</li>
+</ol>
+<p><code>ssh -Y root@&lt;your-server-ip&gt;</code></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This enables secure X11 forwarding.</p>
+</div>
+<ol>
+<li>Install Firefox on the server:</li>
+</ol>
+<p><code>apt install firefox-esr</code></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This may take some time, so using a slightly larger server instance is recommended.</p>
+</div>
+<ol>
+<li>Run Firefox:</li>
+</ol>
+<p><code>firefox</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Firefox window should appear on your local desktop, even though it runs on the remote server.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the GUI isn't showing up make sure that the X11 server is running and that your local machine has the appropiate access.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../../exercise-07/docs/documentation-07/" class="btn btn-neutral float-left" title="07 SSH Port Forwarding"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../exercise-09/docs/documentation-09/" class="btn btn-neutral float-right" title="09 Enabling Index Based File Search">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../../exercise-07/docs/documentation-07/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../../exercise-09/docs/documentation-09/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
