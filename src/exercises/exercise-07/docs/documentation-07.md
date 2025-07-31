@@ -1,4 +1,4 @@
-# SSH Host Forwarding
+# SSH Port Forwarding
 
 ## Technical Background
 

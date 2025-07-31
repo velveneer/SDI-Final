@@ -27,7 +27,7 @@ nav:
   - 04 SSH-Agent: exercises/exercise-04/docs/documentation-04.md
   - 05 GitLab SSH Access: exercises/exercise-05/docs/documentation-05.md
   - 06 SSH Host Hopping: exercises/exercise-06/docs/documentation-06.md
-  - Exercise 07: exercises/exercise-07/docs/documentation-07.md
+  - 07 SSH Port Forwarding: exercises/exercise-07/docs/documentation-07.md
   - Exercise 08: exercises/exercise-08/docs/documentation-08.md
   - Exercise 09: exercises/exercise-09/docs/documentation-09.md
   - Exercise 10: exercises/exercise-10/docs/documentation-10.md
