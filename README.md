@@ -8,6 +8,12 @@ It includes:
 - Documentation: A detailed description of the exercises, workflows, and lessons learned, accessible through a browser-friendly GUI powered by MkDocs.
 
 The purpose of this repository is to provide a reproducible learning environment and an easily navigable documentation platform.
+`
+The MkDocs documentation for this repository is hosted under :
+
+`https://velveneer.github.io/SDI-Final/`
+
+If you want to run it locally on your machine follow the instructions down below.
 
 ## Project Structure 
 
@@ -31,7 +37,11 @@ The purpose of this repository is to provide a reproducible learning environment
 
 `cd SDI-Final`
 
-### Install Python 
+### Running MkDocs Locally
+
+With the following steps you can run the MkDocs locally.
+
+#### Install Python 
 
 Ensure Python and pip are installed on your system:
 
@@ -42,7 +52,7 @@ pip3 --version
 
 If Python is not installed on your machine follow the official instructions for your system.
 
-### Install MdDocs With Plugins
+#### Install MdDocs With Plugins
 
 I use MkDocs for a GUI interface to read the documentation for this project. Use these commands to install it:
 
@@ -51,7 +61,7 @@ pipx install mkdocs
 pipx inject mkdocs mkdocs-material mkdocs-awesome-pages-plugin
 ```
 
-### Serve Documentation Locally
+#### Serve Documentation Locally
 
 `mkdocs serve`
 
