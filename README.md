@@ -11,7 +11,7 @@ The purpose of this repository is to provide a reproducible learning environment
 `
 The MkDocs documentation for this repository is hosted under :
 
-`https://velveneer.github.io/SDI-Final/`
+[GitHub hosted documentation](https://velveneer.github.io/SDI-Final/)
 
 If you want to run it locally on your machine follow the instructions down below.
 
@@ -72,7 +72,7 @@ pipx inject mkdocs mkdocs-material mkdocs-awesome-pages-plugin
 
 The documentation will be available at:
 
-http://127.0.0.1:8000
+[localhost:8000](http://127.0.0.1:8000)
 
 ## Using Source Code 
 

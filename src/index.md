@@ -11,7 +11,7 @@ The purpose of this repository is to provide a reproducible learning environment
 `
 The MkDocs documentation for this repository is hosted under :
 
-`https://velveneer.github.io/SDI-Final/`
+[GitHub hosted documentation](https://velveneer.github.io/SDI-Final/)
 
 If you want to run it locally on your machine follow the instructions from the `README.md` in the Github repository.
 
