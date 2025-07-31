@@ -11,33 +11,34 @@ plugins:
   - search
   - awesome-pages
 
-docs_dir: exercises
+docs_dir: src
 
 nav:
   - Home: index.md
-  - Exercise 01: exercise-01/docs/documentation-01.md
-  - Exercise 02: exercise-02/docs/documentation-02.md
-  - Exercise 03: exercise-03/docs/documentation-03.md
-  - Exercise 04: exercise-04/docs/documentation-04.md
-  - Exercise 05: exercise-05/docs/documentation-05.md
-  - Exercise 06: exercise-06/docs/documentation-06.md
-  - Exercise 07: exercise-07/docs/documentation-07.md
-  - Exercise 08: exercise-08/docs/documentation-08.md
-  - Exercise 09: exercise-09/docs/documentation-09.md
-  - Exercise 10: exercise-10/docs/documentation-10.md
-  - Exercise 11: exercise-11/docs/documentation-11.md
-  - Exercise 12: exercise-12/docs/documentation-12.md
-  - Exercise 13: exercise-13/docs/documentation-13.md
-  - Exercise 14: exercise-14/docs/documentation-14.md
-  - Exercise 15: exercise-15/docs/documentation-15.md
-  - Exercise 16: exercise-16/docs/documentation-16.md
-  - Exercise 17: exercise-17/docs/documentation-17.md
-  - Exercise 18: exercise-18/docs/documentation-18.md
-  - Exercise 19: exercise-19/docs/documentation-19.md
-  - Exercise 20: exercise-20/docs/documentation-20.md
-  - Exercise 21: exercise-21/docs/documentation-21.md
-  - Exercise 22: exercise-22/docs/documentation-22.md
-  - Exercise 23: exercise-23/docs/documentation-23.md
-  - Exercise 24: exercise-24/docs/documentation-24.md
-  - Exercise 25: exercise-25/docs/documentation-25.md
-  - Exercise 26: exercise-26/docs/documentation-26.md
+  - Hetzner Cloud Setup: cloud-setup/docs/setup.md
+  - Exercise 01: exercises/exercise-01/docs/documentation-01.md
+  - Exercise 02: exercises/exercise-02/docs/documentation-02.md
+  - Exercise 03: exercises/exercise-03/docs/documentation-03.md
+  - Exercise 04: exercises/exercise-04/docs/documentation-04.md
+  - Exercise 05: exercises/exercise-05/docs/documentation-05.md
+  - Exercise 06: exercises/exercise-06/docs/documentation-06.md
+  - Exercise 07: exercises/exercise-07/docs/documentation-07.md
+  - Exercise 08: exercises/exercise-08/docs/documentation-08.md
+  - Exercise 09: exercises/exercise-09/docs/documentation-09.md
+  - Exercise 10: exercises/exercise-10/docs/documentation-10.md
+  - Exercise 11: exercises/exercise-11/docs/documentation-11.md
+  - Exercise 12: exercises/exercise-12/docs/documentation-12.md
+  - Exercise 13: exercises/exercise-13/docs/documentation-13.md
+  - Exercise 14: exercises/exercise-14/docs/documentation-14.md
+  - Exercise 15: exercises/exercise-15/docs/documentation-15.md
+  - Exercise 16: exercises/exercise-16/docs/documentation-16.md
+  - Exercise 17: exercises/exercise-17/docs/documentation-17.md
+  - Exercise 18: exercises/exercise-18/docs/documentation-18.md
+  - Exercise 19: exercises/exercise-19/docs/documentation-19.md
+  - Exercise 20: exercises/exercise-20/docs/documentation-20.md
+  - Exercise 21: exercises/exercise-21/docs/documentation-21.md
+  - Exercise 22: exercises/exercise-22/docs/documentation-22.md
+  - Exercise 23: exercises/exercise-23/docs/documentation-23.md
+  - Exercise 24: exercises/exercise-24/docs/documentation-24.md
+  - Exercise 25: exercises/exercise-25/docs/documentation-25.md
+  - Exercise 26: exercises/exercise-26/docs/documentation-26.md

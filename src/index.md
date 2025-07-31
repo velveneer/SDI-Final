@@ -13,14 +13,11 @@ The MkDocs documentation for this repository is hosted under :
 
 `https://velveneer.github.io/SDI-Final/`
 
-If you want to run it locally on your machine follow the instructions down below.
-
-The 
+If you want to run it locally on your machine follow the instructions from the `README.md` in the Github repository.
 
 ## Project Structure 
 
 ```
-.
 ├── src/                       # All work files
 │   ├── cloud-setup/           # All exercises from the course
 │   │   │   ├── docs/          # Hetzner Cloud Setup for the following exercises documentation (Markdown)
@@ -41,47 +38,3 @@ The
 `git clone https://github.com/velveneer/SDI-Final.git`
 
 `cd SDI-Final`
-
-### Running MkDocs Locally
-
-With the following steps you can run the MkDocs locally.
-
-#### Install Python 
-
-Ensure Python and pip are installed on your system:
-
-```
-python3 --version
-pip3 --version
-```
-
-If Python is not installed on your machine follow the official instructions for your system.
-
-#### Install MdDocs With Plugins
-
-I use MkDocs for a GUI interface to read the documentation for this project. Use these commands to install it:
-
-```
-pipx install mkdocs
-pipx inject mkdocs mkdocs-material mkdocs-awesome-pages-plugin
-```
-
-#### Serve Documentation Locally
-
-`mkdocs serve`
-
-The documentation will be available at:
-
-http://127.0.0.1:8000
-
-## Using Source Code 
-
-Each exercise directory contains a File with usage instructions.
-
-// TODO 
-Terraform environment setup
-
-## License
-
-This repository is provided for educational purposes within the scope of the Software Defined Infrastructure class. Reuse outside the course context may require permission.
-
