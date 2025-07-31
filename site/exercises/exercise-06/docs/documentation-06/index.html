@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../../img/favicon.ico" />
-    <title>Exercise 06 - SDI-Documentation-jr125</title>
+    <title>06 SSH Host Hopping - SDI-Documentation-jr125</title>
     <link rel="stylesheet" href="../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Exercise 06";
+        var mkdocs_page_name = "06 SSH Host Hopping";
         var mkdocs_page_input_path = "exercises/exercise-06/docs/documentation-06.md";
         var mkdocs_page_url = null;
       </script>
@@ -50,27 +50,41 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-01/docs/documentation-01/">Exercise 01</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-01/docs/documentation-01/">01 First Server</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-02/docs/documentation-02/">Exercise 02</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-02/docs/documentation-02/">02 Server Re-Creation</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-03/docs/documentation-03/">Exercise 03</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-03/docs/documentation-03/">03 Server Security Improvement</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-04/docs/documentation-04/">Exercise 04</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-04/docs/documentation-04/">04 SSH-Agent</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-05/docs/documentation-05/">Exercise 05</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-05/docs/documentation-05/">05 GitLab SSH Access</a>
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Exercise 06</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">06 SSH Host Hopping</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#technical-background">Technical Background</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-links">Related Links</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ssh-configuration-for-agent-forwarding">SSH Configuration for Agent Forwarding</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-host-hopping">Using Host Hopping</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -167,7 +181,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Exercise 06</li>
+      <li class="breadcrumb-item active">06 SSH Host Hopping</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -176,12 +190,95 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="ssh-host-hopping">SSH Host Hopping</h1>
+<h2 id="technical-background">Technical Background</h2>
+<p>In many infrastructures, some systems are located in restricted networks and can only be accessed through an intermediate “jump host”. Copying private SSH keys onto each host is considered insecure because it increases the risk of key compromise. A safer approach is SSH agent forwarding, which allows you to reuse your local SSH credentials when hopping through one or more intermediate hosts, without ever transferring your private key.</p>
+<h2 id="related-links">Related Links</h2>
+<p><a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a>
+<a href="https://wiki.gentoo.org/wiki/SSH_jump_host">SSH jump host</a>
+<a href="https://developer.mozilla.org/en-US/docs/Glossary/SSH_Agent_Forwarding">SSH Agent Forwarding Guide</a>
+<a href="https://man.openbsd.org/ssh_config#ForwardAgent">OpenSSH Manual: <code>ForwardAgent</code></a></p>
+<h2 id="solution">Solution</h2>
+<h3 id="ssh-configuration-for-agent-forwarding">SSH Configuration for Agent Forwarding</h3>
+<ol>
+<li>On your local workstation, enable agent forwarding for the intermediate host (Host A).</li>
+</ol>
+<p>Edit <code>~/.ssh/config</code>:</p>
+<pre><code>Host hostA
+    HostName &lt;hostA-address&gt;
+    User root
+    ForwardAgent yes
+
+Host hostB
+    HostName &lt;hostB-address&gt;
+    User root
+
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This ensures your SSH agent is forwarded when connecting to Host A.</p>
+</div>
+<ol>
+<li>Before connecting, start the SSH agent and load your private key:</li>
+</ol>
+<pre><code>eval &quot;$(ssh-agent -s)&quot;
+ssh-add ~/.ssh/id_ed25519
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You only enter the passphrase once.</p>
+</div>
+<h3 id="using-host-hopping">Using Host Hopping</h3>
+<ol>
+<li>Connect to Host A</li>
+</ol>
+<p>From your local machine:</p>
+<p><code>ssh hostA</code></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You are now inside Host A while your local SSH agent is available to it.</p>
+</div>
+<ol>
+<li>Connecting from Host A to Host B</li>
+</ol>
+<p>From within Host A:</p>
+<p><code>ssh hostB</code></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This works even though Host B doesn’t have your private key, because the authentication is forwarded from your local workstation.</p>
+</div>
+<ol>
+<li>Closing all connections:</li>
+</ol>
+<p>Exit Host B and then Host A:</p>
+<pre><code>exit
+exit
+</code></pre>
+<ol>
+<li>Direct Login to Host B</li>
+</ol>
+<p>Try to connect directly from your workstation to Host B:</p>
+<p><code>ssh hostB</code></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This fails with: <code>Permission denied (publickey).</code> Host B only allows access through Host A.</p>
+</div>
+<ol>
+<li>Reverse Hop from B to A:</li>
+</ol>
+<p>If you log in to Host B (through Host A) and attempt to connect back to Host A:</p>
+<p><code>hostA</code></p>
+<p>You will again see:</p>
+<p><code>Permission denied (publickey).</code></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This demonstrates that agent forwarding is one-directional. It allows the initial remote host to use your local agent, but doesn’t cascade to subsequent reverse connections.</p>
+</div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../../exercise-05/docs/documentation-05/" class="btn btn-neutral float-left" title="Exercise 05"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../exercise-05/docs/documentation-05/" class="btn btn-neutral float-left" title="05 GitLab SSH Access"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../../../exercise-07/docs/documentation-07/" class="btn btn-neutral float-right" title="Exercise 07">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 

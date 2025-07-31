@@ -31,7 +31,7 @@ This exercise teaches how to:
 
 [How Firewalls Work](https://www.cisco.com/site/us/en/learn/topics/security/what-is-a-firewall.html#tabs-69d6a56dd3-item-fdd67b2fb8-tab)
 
-## Prerequsits
+## Prerequisits
 
 ### Project Access
 

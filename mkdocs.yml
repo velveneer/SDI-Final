@@ -23,8 +23,8 @@ nav:
   - 02 Server Re-Creation: exercises/exercise-02/docs/documentation-02.md
   - 03 Server Security Improvement: exercises/exercise-03/docs/documentation-03.md
   - 04 SSH-Agent: exercises/exercise-04/docs/documentation-04.md
-  - Exercise 05: exercises/exercise-05/docs/documentation-05.md
-  - Exercise 06: exercises/exercise-06/docs/documentation-06.md
+  - 05 GitLab SSH Access: exercises/exercise-05/docs/documentation-05.md
+  - 06 SSH Host Hopping: exercises/exercise-06/docs/documentation-06.md
   - Exercise 07: exercises/exercise-07/docs/documentation-07.md
   - Exercise 08: exercises/exercise-08/docs/documentation-08.md
   - Exercise 09: exercises/exercise-09/docs/documentation-09.md

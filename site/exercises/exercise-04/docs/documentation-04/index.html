@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../../img/favicon.ico" />
-    <title>Exercise 04 - SDI-Documentation-jr125</title>
+    <title>04 SSH-Agent - SDI-Documentation-jr125</title>
     <link rel="stylesheet" href="../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Exercise 04";
+        var mkdocs_page_name = "04 SSH-Agent";
         var mkdocs_page_input_path = "exercises/exercise-04/docs/documentation-04.md";
         var mkdocs_page_url = null;
       </script>
@@ -50,27 +50,41 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-01/docs/documentation-01/">Exercise 01</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-01/docs/documentation-01/">01 First Server</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-02/docs/documentation-02/">Exercise 02</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-02/docs/documentation-02/">02 Server Re-Creation</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-03/docs/documentation-03/">Exercise 03</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-03/docs/documentation-03/">03 Server Security Improvement</a>
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Exercise 04</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">04 SSH-Agent</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#technical-background">Technical Background</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-links">Related Links</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#starting-the-ssh-agent">Starting the SSH Agent</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#setting-up-the-agent">Setting up the Agent</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-05/docs/documentation-05/">Exercise 05</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-05/docs/documentation-05/">05 GitLab SSH Access</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-06/docs/documentation-06/">Exercise 06</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-06/docs/documentation-06/">06 SSH Host Hopping</a>
                 </li>
               </ul>
               <ul>
@@ -167,7 +181,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Exercise 04</li>
+      <li class="breadcrumb-item active">04 SSH-Agent</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -176,13 +190,60 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="ssh-agent">ssh-agent</h1>
+<h2 id="technical-background">Technical Background</h2>
+<p>Using SSH keys with passphrases significantly increases security by protecting private keys at rest. However, entering the passphrase every time you connect to a remote server quickly becomes tedious, especially when managing multiple servers.
+The ssh-agent service solves this problem by storing unlocked keys securely in memory during a session, so you only enter the passphrase once. This approach maintains security while improving usability, particularly for frequent administrative tasks.</p>
+<p>On most modern Linux distributions the ssh-agent is installed as a part of the OpenSSH package. Check before if you're using a minimal distribution and install it in case it's not included.</p>
+<h2 id="related-links">Related Links</h2>
+<p><a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a></p>
+<p><a href="https://linux.die.net/man/1/ssh-keygen">ssh-keygen</a></p>
+<p><a href="https://www.ssh.com/academy/ssh/passphrase">ssh-passphrase</a></p>
+<p><a href="https://linux.die.net/man/1/ssh-agent">ssh-agent</a></p>
+<p><a href="https://keepassxc.org/docs/#faq-ssh-agent-how">KeepassXC SSH Agent Integration</a></p>
+<h2 id="solution">Solution</h2>
+<h3 id="starting-the-ssh-agent">Starting the SSH Agent</h3>
+<p>Begin by launching the agent in your shell:</p>
+<p><code>eval "$(ssh-agent -s)"</code></p>
+<p>If successful, it returns a process ID like:</p>
+<p><code>Agent pid 5678</code></p>
+<h3 id="setting-up-the-agent">Setting up the Agent</h3>
+<ol>
+<li>Load your private key into the agent:</li>
+</ol>
+<p><code>ssh-add ~/.ssh/id_ed25519</code></p>
+<ol>
+<li>If the key is protected by a passphrase, you will be prompted once:</li>
+</ol>
+<pre><code>Enter passphrase for /home/user/.ssh/id_ed25519:
+Identity added: /home/user/.ssh/id_ed25519
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>After this, the agent keeps the unlocked key available for the rest of your session.</p>
+</div>
+<ol>
+<li>Confirm that the agent is active:</li>
+</ol>
+<p><code>printenv | grep SSH_AUTH_SOCK</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Expected Output: <code>SSH_AUTH_SOCK=/run/user/1000/keyring/ssh</code></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The agent must be started for every new shell session unless automated.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Forgetting to run <code>ssh-add</code> will still prompt for the passphrase.</p>
+</div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../../exercise-03/docs/documentation-03/" class="btn btn-neutral float-left" title="Exercise 03"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../../exercise-05/docs/documentation-05/" class="btn btn-neutral float-right" title="Exercise 05">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../../exercise-03/docs/documentation-03/" class="btn btn-neutral float-left" title="03 Server Security Improvement"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../exercise-05/docs/documentation-05/" class="btn btn-neutral float-right" title="05 GitLab SSH Access">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>

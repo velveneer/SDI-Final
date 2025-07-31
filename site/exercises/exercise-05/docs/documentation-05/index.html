@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../../img/favicon.ico" />
-    <title>Exercise 05 - SDI-Documentation-jr125</title>
+    <title>05 GitLab SSH Access - SDI-Documentation-jr125</title>
     <link rel="stylesheet" href="../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Exercise 05";
+        var mkdocs_page_name = "05 GitLab SSH Access";
         var mkdocs_page_input_path = "exercises/exercise-05/docs/documentation-05.md";
         var mkdocs_page_url = null;
       </script>
@@ -50,27 +50,41 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-01/docs/documentation-01/">Exercise 01</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-01/docs/documentation-01/">01 First Server</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-02/docs/documentation-02/">Exercise 02</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-02/docs/documentation-02/">02 Server Re-Creation</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-03/docs/documentation-03/">Exercise 03</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-03/docs/documentation-03/">03 Server Security Improvement</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-04/docs/documentation-04/">Exercise 04</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-04/docs/documentation-04/">04 SSH-Agent</a>
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Exercise 05</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">05 GitLab SSH Access</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#technical-background">Technical Background</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-links">Related Links</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-public-ssh-key-to-gitlab">Adding Public SSH Key to GitLab</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#testing-ssh-access">Testing SSH Access</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-06/docs/documentation-06/">Exercise 06</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-06/docs/documentation-06/">06 SSH Host Hopping</a>
                 </li>
               </ul>
               <ul>
@@ -167,7 +181,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Exercise 05</li>
+      <li class="breadcrumb-item active">05 GitLab SSH Access</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -176,13 +190,77 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="mi-gitlab-access-by-ssh">MI Gitlab access by SSH</h1>
+<h2 id="technical-background">Technical Background</h2>
+<p>When working with Git repositories, HTTPS access often requires re-entering a username and password or personal access token for every push and pull operation.
+Using SSH keys eliminates this repetitive authentication by providing a secure, passwordless connection. Once a public key is registered in the GitLab profile, it enables encrypted communication and seamless Git operations without manually typing credentials.</p>
+<h2 id="related-links">Related Links</h2>
+<p><a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a></p>
+<p><a href="https://docs.gitlab.com/user/ssh">Use SSH keys to communicate with GitLab</a></p>
+<p><a href="https://gitlab.mi.hdm-stuttgart.de/">MI GitLab</a></p>
+<h2 id="solution">Solution</h2>
+<h3 id="adding-public-ssh-key-to-gitlab">Adding Public SSH Key to GitLab</h3>
+<ol>
+<li>Output the content from your public key file with the command:</li>
+</ol>
+<p><code>cat ~/.ssh/id_ed25519.pub</code></p>
+<ol>
+<li>Copy the content</li>
+<li>Login to your GitLab account and navigate over the GUI to:</li>
+</ol>
+<p><code>Profile</code> → <code>SSH Keys</code></p>
+<ol>
+<li>Paste the public key into the field and assign a descriptive title</li>
+<li>Click <code>Add Key</code></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Forgetting to add the key in GitLab results in <code>Permission denied (publickey)</code> errors.</p>
+</div>
+<h3 id="testing-ssh-access">Testing SSH Access</h3>
+<ol>
+<li>Try to clone a repository with the SSH URL:</li>
+</ol>
+<p><code>git clone git@gitlab.mi.hdm-stuttgart.de:&lt;username&gt;/&lt;repository&gt;.git</code></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>On the first connection, confirm the host fingerprint. If your SSH key has a passphrase, you’ll be prompted to enter it once.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If using passphrase-protected keys, ensure an SSH agent is running to avoid repeated prompts.</p>
+</div>
+<ol>
+<li>Push changes to the remote repository:</li>
+</ol>
+<p>Make a change, commit and push it:</p>
+<pre><code>git add .
+git commit -m &quot;Initial commit via SSH&quot;
+git push origin main
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The push completes without requiring a username or password because the SSH key handles authentication.</p>
+</div>
+<ol>
+<li>Pull a Change</li>
+</ol>
+<p>Make a remote change and pull to your local git:</p>
+<p><code>git pull</code></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Git synchronizes using the same SSH-secured connection.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Check your SSH connection directly with <code>ssh -T git@gitlab.mi.hdm-stuttgart.de</code></p>
+</div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../../exercise-04/docs/documentation-04/" class="btn btn-neutral float-left" title="Exercise 04"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../../exercise-06/docs/documentation-06/" class="btn btn-neutral float-right" title="Exercise 06">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../../exercise-04/docs/documentation-04/" class="btn btn-neutral float-left" title="04 SSH-Agent"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../exercise-06/docs/documentation-06/" class="btn btn-neutral float-right" title="06 SSH Host Hopping">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>

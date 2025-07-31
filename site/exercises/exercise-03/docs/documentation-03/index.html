@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../../img/favicon.ico" />
-    <title>Exercise 03 - SDI-Documentation-jr125</title>
+    <title>03 Server Security Improvement - SDI-Documentation-jr125</title>
     <link rel="stylesheet" href="../../../../css/theme.css" />
     <link rel="stylesheet" href="../../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Exercise 03";
+        var mkdocs_page_name = "03 Server Security Improvement";
         var mkdocs_page_input_path = "exercises/exercise-03/docs/documentation-03.md";
         var mkdocs_page_url = null;
       </script>
@@ -50,27 +50,55 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-01/docs/documentation-01/">Exercise 01</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-01/docs/documentation-01/">01 First Server</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-02/docs/documentation-02/">Exercise 02</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-02/docs/documentation-02/">02 Server Re-Creation</a>
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Exercise 03</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">03 Server Security Improvement</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#technical-background">Technical Background</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-links">Related Links</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-firewall">Creating a Firewall</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#uploading-and-using-a-public-ssh-key">Uploading and Using a Public SSH Key</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-server-using-firewall-and-ssh-key">Creating a Server Using Firewall and SSH Key</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#testing-icmp-and-ssh-connectivity">Testing ICMP and SSH Connectivity</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#allowing-ssh">Allowing SSH</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#updating-and-rebooting-the-server">Updating and Rebooting the Server</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#installing-nginx-on-the-server">Installing NGINX on the Server</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#local-http-test">Local HTTP Test</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#allowing-http-access">Allowing HTTP Access</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-04/docs/documentation-04/">Exercise 04</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-04/docs/documentation-04/">04 SSH-Agent</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-05/docs/documentation-05/">Exercise 05</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-05/docs/documentation-05/">05 GitLab SSH Access</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-06/docs/documentation-06/">Exercise 06</a>
+                <li class="toctree-l1"><a class="reference internal" href="../../../exercise-06/docs/documentation-06/">06 SSH Host Hopping</a>
                 </li>
               </ul>
               <ul>
@@ -167,7 +195,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Exercise 03</li>
+      <li class="breadcrumb-item active">03 Server Security Improvement</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -176,13 +204,155 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="server-security-improvement">Server Security Improvement</h1>
+<h2 id="technical-background">Technical Background</h2>
+<p>Default cloud servers are often configured for convenience rather than security. Common issues include password-based SSH access, open firewall rules, and outdated software packages. This exercise demonstrates how to improve server security by:</p>
+<ul>
+<li>Using public key authentication instead of passwords</li>
+<li>Limiting network access with a minimal firewall configuration</li>
+<li>Keeping the system up to date</li>
+<li>Deploying a basic web service (NGINX) under these security constraints</li>
+</ul>
+<h2 id="related-links">Related Links</h2>
+<p><a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a></p>
+<p><a href="https://accounts.hetzner.com/login">Hetzner Login</a></p>
+<p><a href="https://console.hetzner.cloud/">Hetzner Console</a></p>
+<p><a href="https://linux.die.net/man/1/ssh-keygen">ssh-keygen</a></p>
+<p><a href="https://www.ssh.com/academy/ssh/passphrase">ssh-passphrase</a></p>
+<p><a href="https://linux.die.net/man/1/scp">scp</a></p>
+<p><a href="https://docs.nginx.com/nginx/admin-guide/web-server">NGINX</a></p>
+<p><a href="https://linux.die.net/man/1/wget">wget</a></p>
+<p><a href="https://www.w3.org/Protocols/">HTTP</a></p>
+<p><a href="https://www.cisco.com/site/us/en/learn/topics/security/what-is-a-firewall.html#tabs-69d6a56dd3-item-fdd67b2fb8-tab">How Firewalls Work</a></p>
+<h2 id="solution">Solution</h2>
+<h3 id="creating-a-firewall">Creating a Firewall</h3>
+<p>In the Hetzner Cloud Console:</p>
+<ol>
+<li>
+<p>Go to <code>Firewalls</code> → <code>Create Firewall</code></p>
+</li>
+<li>
+<p>Add one inbound rule:</p>
+<ul>
+<li><code>Protocol</code>: ICMP</li>
+<li><code>Action</code>: Allow</li>
+</ul>
+</li>
+<li>
+<p>Save the firewall, for example as <code>icmp-only-fw</code></p>
+</li>
+</ol>
+<h3 id="uploading-and-using-a-public-ssh-key">Uploading and Using a Public SSH Key</h3>
+<ol>
+<li>
+<p>Navigate to <code>Security</code> → <code>SSH Keys</code></p>
+</li>
+<li>
+<p>Upload your public SSH key and mark it as <code>default</code></p>
+</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This ensures passwordless and more secure authentication.</p>
+</div>
+<h3 id="creating-a-server-using-firewall-and-ssh-key">Creating a Server Using Firewall and SSH Key</h3>
+<ol>
+<li>
+<p>Deploy a new server using the same <code>Image</code> and <code>Type</code> as before</p>
+</li>
+<li>
+<p>Select the <code>icmp-only-fw</code> firewall and your uploaded SSH key</p>
+</li>
+<li>
+<p>After deployment, note the server’s public IP</p>
+</li>
+</ol>
+<h3 id="testing-icmp-and-ssh-connectivity">Testing ICMP and SSH Connectivity</h3>
+<p>Run this command in your local terminal:</p>
+<p><code>ping &lt;ypur-server-ip&gt;</code></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The server responds to ICMP packets, confirming that the firewall rule works.</p>
+</div>
+<p>Try to connect to your server via SSH:</p>
+<p><code>ssh root@&lt;your-server-ip&gt;</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your connection should time out because port 22 is not allowed by the firewall</p>
+</div>
+<h3 id="allowing-ssh">Allowing SSH</h3>
+<ol>
+<li>In the Hetzner Cloud Console go to <code>Firewalls</code></li>
+<li>Edit your created rule and add a new inbound rule:<ul>
+<li><code>Protocol</code>: TCP</li>
+<li><code>Port</code>: 22</li>
+<li><code>Action</code>: Allow</li>
+</ul>
+</li>
+<li>Retry the SSH Connection:</li>
+</ol>
+<pre><code>ssh root@&lt;server-ip&gt;
+hostname
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This time your login should succed. This should not require a password because the SSH key was used.</p>
+</div>
+<h3 id="updating-and-rebooting-the-server">Updating and Rebooting the Server</h3>
+<p>Run these commands in a terminal on your server:</p>
+<pre><code>apt update
+apt upgrade -y
+aptitude -y upgrade
+reboot
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This ensures all packages and the kernel are up to date.</p>
+</div>
+<h3 id="installing-nginx-on-the-server">Installing NGINX on the Server</h3>
+<p>To install the webser NGINX run this commands:</p>
+<p><code>apt install nginx -y</code></p>
+<p>To verify that the installation was successful use:</p>
+<p><code>systemctl status nginx</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The output should show NGINX running and enabled.</p>
+</div>
+<h3 id="local-http-test">Local HTTP Test</h3>
+<ol>
+<li>On the server run:</li>
+</ol>
+<p><code>wget -O - http://&lt;your-server-ip&gt;</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You should see the NGINX welcome page HTML returned.</p>
+</div>
+<ol>
+<li>Open <code>http://&lt;your-server-ip&gt;</code> in your local machine browser</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This should fail because port 80 is still blocked by the firewall</p>
+</div>
+<h3 id="allowing-http-access">Allowing HTTP Access</h3>
+<ol>
+<li>In the Hetzner Cloud Console go to <code>Firewalls</code></li>
+<li>Edit your created rule and add a new inbound rule:</li>
+<li><code>Protocol</code>: TCP</li>
+<li><code>Port</code>: 80</li>
+<li><code>Action</code>: Allow</li>
+<li>Retry to visit the site in your browser from your local machine.</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Now the NGINX welcome page should load successfully.</p>
+</div>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../../exercise-02/docs/documentation-02/" class="btn btn-neutral float-left" title="Exercise 02"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../../exercise-04/docs/documentation-04/" class="btn btn-neutral float-right" title="Exercise 04">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../../exercise-02/docs/documentation-02/" class="btn btn-neutral float-left" title="02 Server Re-Creation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../exercise-04/docs/documentation-04/" class="btn btn-neutral float-right" title="04 SSH-Agent">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
