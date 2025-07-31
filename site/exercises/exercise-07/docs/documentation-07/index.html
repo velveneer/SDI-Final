@@ -75,6 +75,24 @@
               </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Exercise 07</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#technical-background">Technical Background</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#related-links">Related Links</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#server-setup">Server Setup</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ssh-only-firewall">SSH Only Firewall</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#forward-remote-port-to-local-port">Forward Remote Port to Local Port</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#accessing-nginx">Accessing Nginx</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -176,7 +194,88 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="ssh-host-forwarding">SSH Host Forwarding</h1>
+<h2 id="technical-background">Technical Background</h2>
+<p>Firewalls are often configured to block access to all services except essential ones like SSH, reducing the attack surface of a server.
+When you need temporary access to an internal service (like a web server running on port 80) without opening it publicly, SSH port forwarding provides a secure workaround. With a single SSH connection, you can tunnel traffic from a local port to a remote port, effectively “borrowing” your SSH access to securely reach otherwise blocked services.</p>
+<h2 id="related-links">Related Links</h2>
+<p><a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a></p>
+<p><a href="https://wiki.gentoo.org/wiki/SSH_jump_host">SSH jump host</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Glossary/SSH_Agent_Forwarding">SSH Agent Forwarding Guide</a></p>
+<p><a href="https://man.openbsd.org/ssh_config#ForwardAgent">OpenSSH Manual: <code>ForwardAgent</code></a></p>
+<p><a href="https://docs.Nginx.com/Nginx/admin-guide/web-server">Nginx</a></p>
+<p><a href="https://www.w3.org/Protocols/">HTTP</a></p>
+<h2 id="solution">Solution</h2>
+<h3 id="server-setup">Server Setup</h3>
+<ol>
+<li>
+<p>Deploy a server with the same configuration as in <code>Exercise 3</code></p>
+</li>
+<li>
+<p>Install and start Nginx:</p>
+</li>
+</ol>
+<pre><code>apt install Nginx -y
+systemctl status Nginx
+</code></pre>
+<ol>
+<li>Verify that the webserver works by visiting</li>
+</ol>
+<p><code>http://&lt;your-server-ip&gt;</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You should see the Nginx welcome page.</p>
+</div>
+<h3 id="ssh-only-firewall">SSH Only Firewall</h3>
+<p>In the Hetzner Cloud Console:</p>
+<ol>
+<li>
+<p>Go to <code>Firewalls</code> → <code>Create Firewall</code></p>
+</li>
+<li>
+<p>Edit to only keep one inbound TCP rule:</p>
+<ul>
+<li><code>Protocol</code>: TCP</li>
+<li><code>Port</code>: 22</li>
+</ul>
+</li>
+<li>
+<p>Remove HTTP (Port 80) access</p>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Tunnel effect doesn't work if Port 80 rule was not removed</p>
+</div>
+<p>Test that HTTP is now bloacked:</p>
+<p><code>curl http://&lt;server-ip&gt;</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Expected Output: <code>curl: (7) Failed to connect to &lt;server-ip&gt; port 80: Connection refused</code></p>
+</div>
+<h3 id="forward-remote-port-to-local-port">Forward Remote Port to Local Port</h3>
+<ol>
+<li>Use SSH port forwarding from your local machine:</li>
+</ol>
+<p><code>ssh -L 2000:localhost:80 root@&lt;your-server-ip&gt;</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>2000</code> -&gt; local port on your workstation</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>localhost:80</code> -&gt; port 80 on the remote server (from its own perspective)</p>
+</div>
+<ol>
+<li>Keep this SSH session running while testing.</li>
+</ol>
+<h3 id="accessing-nginx">Accessing Nginx</h3>
+<p>Opem a browser in your local machine and navigate to:</p>
+<p><code>http://localhost:2000</code></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Even though port 80 is blocked externally, you now see the Nginx welcome page via the secure SSH tunnel.</p>
+</div>
               
             </div>
           </div><footer>
