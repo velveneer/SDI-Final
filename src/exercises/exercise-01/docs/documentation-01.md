@@ -41,7 +41,7 @@ This exercise teaches how to:
 4. Open the `Setting` page and go the `Members` Options
 5. Check if you have the `Admin` role assigned.
 
-### Setting Up A Firewall
+### Setting up a Firewall
 
 1. In the `Cloud Console`, navigate to `Firewalls` → `Create Firewall`
 
@@ -75,7 +75,7 @@ This exercise teaches how to:
 !!! Note
     You'll receive an E-Mail containing your server's IP and root password. You may reset root's password in the GUI's rescue tab.
 
-## Accessing Server Via SSH
+## Accessing Server via SSH
 
 1. Conntect to the server via a terminal with ssh:
 
@@ -111,7 +111,7 @@ New password:
 Retype new password:
 ```
 
-## Access Server Via Hetzner Console
+## Access Server via Hetzner Console
 
 Hetzner offers a way to access the server over a built-in console inside the webapplication.
 
