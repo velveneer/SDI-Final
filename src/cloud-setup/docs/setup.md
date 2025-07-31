@@ -17,17 +17,19 @@ Hetzner provides an offer for educational institutions to learn how to use these
 1. Visit [Hetzner Sign-Up](https://accounts.hetzner.com/signUp)
    
 2. Register using your HdM email address 
-> [!IMPORTANT]  
-> It's crucial to use your HdM email to get educational benefits.
+
+!!! Important 
+    It's crucial to use your HdM email to get educational benefits.
 
 3. Enable Two-Factor Authentication (2FA) immediately 
-> [!WARNING]  
-> Mandatory for security
+
+!!! WARNING
+    Mandatory for security
 
 4. Confirm that you register an account in the appropiate Moodle course section.
 
-> [!NOTE]  
-> Hetzner may request identy verification, but no payment info is needed. If you get asked to put in payment options ignore and skip it.
+!!!NOTE
+    Hetzner may request identy verification, but no payment info is needed. If you get asked to put in payment options ignore and skip it.
 
 ## Project Access
 

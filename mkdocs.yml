@@ -7,6 +7,9 @@ theme:
     - yaml
     - rust
 
+markdown_extensions:
+  - admonition
+
 plugins:
   - search
   - awesome-pages
